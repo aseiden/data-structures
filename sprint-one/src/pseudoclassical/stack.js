@@ -7,12 +7,12 @@ var Stack = function() {
 
 Stack.prototype.size = function() {
   return this.topKey;
-}
+};
 
 Stack.prototype.push = function(value) {
   this.storage[this.topKey] = value;
   this.topKey++;
-}
+};
 
 Stack.prototype.pop = function() {
   if (this.topKey > 0) {
@@ -21,4 +21,4 @@ Stack.prototype.pop = function() {
     this.topKey--;
     return top;
   }
-}
+};
