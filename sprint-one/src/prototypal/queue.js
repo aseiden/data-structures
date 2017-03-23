@@ -18,7 +18,7 @@ var queueMethods = {
     this.tail++;
   },
   dequeue: function() {
-    if (this.tail !== this.head) {
+    if (this.size() > 0) {
       var output = this.storage[this.head];
       this.head++;
       return output;
