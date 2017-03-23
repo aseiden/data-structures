@@ -1,11 +1,10 @@
 var Stack = function() {
-  var someInstance = Object.create(stackMethods);
+  var newStack = Object.create(stackMethods);
 
-  // Use an object with numeric keys to store values
-  someInstance.storage = {};
-  someInstance.topKey = 0;
+  newStack.storage = {};
+  newStack.topKey = 0;
 
-  return someInstance;
+  return newStack;
 };
 
 var stackMethods = {
