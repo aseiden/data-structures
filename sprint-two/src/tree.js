@@ -1,9 +1,9 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
+  _.extend(newTree, treeMethods);
 
-  // your code here
-  newTree.children = null;  // fix me
+  newTree.children = []; 
 
   return newTree;
 };
@@ -11,13 +11,33 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target) {
+  //Does this tree contain the value?
+    // if yes, return true
+    // if no, look into the chidren and do the same
+  var output = false;
+  
+  var searchTree = function (node, target) {
+    if (node.value === target) {
+      output = true;
+    } else {
+      _.each(node.children, function (child) {
+        searchTree(child, target);
+      });
+    }
+  };
+
+  searchTree(this, target);
+  return output;  
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ addChild: constant - O(1)
+ contains: linear - O(n)
  */
