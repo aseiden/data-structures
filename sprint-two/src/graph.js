@@ -6,7 +6,6 @@ var Graph = function() {
 Graph.prototype.addNode = function(node) {
   var newNode = {};
   newNode.value = node;
-  //newNode.edges = [];
   newNode.edges = {};
   this.nodes[node] = newNode;
 };
