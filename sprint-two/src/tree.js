@@ -16,19 +16,22 @@ treeMethods.addChild = function(value) {
 
 treeMethods.contains = function(target) {
   var output = false;
-  
-  var searchTree = function (node, target) {
+
+  this.depthFirst(function(node) {
     if (node.value === target) {
       output = true;
-    } else {
-      _.each(node.children, function (child) {
-        searchTree(child, target);
-      });
     }
-  };
+  });
 
-  searchTree(this, target);
   return output;  
+};
+
+treeMethods.depthFirst = function(cb) {
+  cb(this);
+
+  _.each(this.children, function(child) {
+    child.depthFirst(cb);
+  });
 };
 
 
@@ -37,4 +40,5 @@ treeMethods.contains = function(target) {
  * Complexity: What is the time complexity of the above functions?
  addChild: constant - O(1)
  contains: linear - O(n)
+ depthFirst: linear
  */
