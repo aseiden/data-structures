@@ -15,9 +15,6 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  //Does this tree contain the value?
-    // if yes, return true
-    // if no, look into the chidren and do the same
   var output = false;
   
   var searchTree = function (node, target) {

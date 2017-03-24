@@ -15,8 +15,6 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
-    // look at the current head's next property
-    // assign list.head to the next property
     var newHead = list.head.next;
     var oldHeadValue = list.head.value;
     list.head = newHead;
