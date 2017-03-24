@@ -6,7 +6,8 @@ var Graph = function() {
 Graph.prototype.addNode = function(node) {
   var newNode = {};
   newNode.value = node;
-  newNode.edges = [];
+  //newNode.edges = [];
+  newNode.edges = {};
   this.nodes[node] = newNode;
 };
 
@@ -24,20 +25,17 @@ Graph.prototype.removeNode = function(node) {
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  return this.nodes[fromNode].edges.includes(toNode);
+  return this.nodes[fromNode].edges.hasOwnProperty(toNode);
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  this.nodes[fromNode].edges.push(toNode);
-  this.nodes[toNode].edges.push(fromNode);
+  this.nodes[fromNode].edges[toNode] = toNode;
+  this.nodes[toNode].edges[fromNode] = fromNode;
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  var fromNodeIndex = this.nodes[fromNode].edges.indexOf(toNode);
-  var toNodeIndex = this.nodes[toNode].edges.indexOf(fromNode);
-  
-  this.nodes[fromNode].edges.splice(fromNodeIndex, 1);
-  this.nodes[toNode].edges.splice(toNodeIndex, 1);
+  delete this.nodes[fromNode].edges[toNode];
+  delete this.nodes[toNode].edges[fromNode];
 };
 
 Graph.prototype.forEachNode = function(cb) {
@@ -50,10 +48,10 @@ Graph.prototype.forEachNode = function(cb) {
  * Complexity: What is the time complexity of the above functions?
  addnode: constant O(1)
  contains: constant O(1)
- removeNode: linear O(n) can be improved
- hasEdge: linear O(n) can be improved
+ removeNode: linear O(n)
+ hasEdge: linear O(1)
  addEdge: constant O(1)
- removEdge: linear O(n) can be improved
+ removEdge: linear O(1)
  forEachNode: linear O(n)
  */
 
