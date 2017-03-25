@@ -52,33 +52,32 @@ HashTable.prototype.remove = function(k) {
 
 HashTable.prototype.resize = function(direction) {
   var tempStorage = [];
-  currentHashTable = this;
-  currentHashTable._isResizing = true;
+  this._isResizing = true;
 
 
-  currentHashTable._storage.each(function(bucket, index, hashStorage) {
+  this._storage.each(function(bucket, index, hashStorage) {
     if (Array.isArray(bucket)) {
       bucket.forEach(function(tuple, index, bucket) {
         tempStorage.push(tuple);
-      })
+      });
     }
   });
   
   if (direction === 'expand') {
-    currentHashTable._limit = currentHashTable._limit * 2; 
+    this._limit = this._limit * 2; 
   } else {
-    currentHashTable._limit = Math.max(currentHashTable._limit / 2, 1);
+    this._limit = Math.max(this._limit / 2, 1);
   }
 
-  currentHashTable._storage = LimitedArray(currentHashTable._limit);
+  this._storage = LimitedArray(this._limit);
 
-  currentHashTable._tupleCount = 0;
+  this._tupleCount = 0;
 
   for (var i = 0; i < tempStorage.length; i++) {
-    currentHashTable.insert(tempStorage[i][0], tempStorage[i][1]);
+    this.insert(tempStorage[i][0], tempStorage[i][1]);
   }
   
-  currentHashTable._isResizing = false;
+  this._isResizing = false;
 };
 
 /*
@@ -86,6 +85,7 @@ HashTable.prototype.resize = function(direction) {
  insert: constant
  retrieve: constant
  remove: constant
+ resize: linear
  */
 
 
