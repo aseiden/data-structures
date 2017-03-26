@@ -48,12 +48,17 @@ HashTable.prototype.remove = function(k) {
   if (this._limit * .25 > this._tupleCount && this._tupleCount > 0) {
     this.resize('contract');
   }
+
+  //should return the removed value
 };
 
 HashTable.prototype.resize = function(direction) {
   var tempStorage = [];
   this._isResizing = true;
 
+//we can pass in the new size instead of the direction.
+// we can remove the isResizing too (i think) if we copy storage to
+// to an oldStorage variable. 
 
   this._storage.each(function(bucket, index, hashStorage) {
     if (Array.isArray(bucket)) {
